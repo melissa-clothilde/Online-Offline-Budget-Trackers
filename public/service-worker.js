@@ -1,4 +1,4 @@
-const FILES_TO_CACHE = ["/", "/index.html", "/index.js", '/manifest.webmanifest'];
+const FILES_TO_CACHE = ["/", "/index.html", "/styles.css", "/index.js", '/manifest.webmanifest'];
 
 const iconSizes = ["192", "512"];
 const iconFiles = iconSizes.map(
@@ -43,7 +43,7 @@ self.addEventListener("activate", function(evt) {
 // fetch
 self.addEventListener("fetch", function (evt) {
   const { url } = evt.request;
-  if (url.includes("/all") || url.includes("/find")) {
+  if (url.includes("/api/transaction")) {
     evt.respondWith(
       caches
         .open(DATA_CACHE_NAME)
