@@ -44,12 +44,14 @@ self.addEventListener("activate", function(evt) {
 self.addEventListener("fetch", function (evt) {
   const { url } = evt.request;
   if (url.includes("/api/transaction")) {
+    
     evt.respondWith(
       caches
         .open(DATA_CACHE_NAME)
         .then((cache) => {
           return fetch(evt.request)
             .then((response) => {
+              console.log("response!", response)
               // If the response was good, clone it and store it in the cache.
               if (response.status === 200) {
                 cache.put(url, response.clone());
@@ -58,8 +60,10 @@ self.addEventListener("fetch", function (evt) {
               return response;
             })
             .catch((err) => {
+              console.log("network request failed!", evt.request)//COULD NOT GET FROM CACHE
               // Network request failed, try to get it from the cache.
               return cache.match(evt.request);
+              
             });
         })
         .catch((err) => console.log(err))
