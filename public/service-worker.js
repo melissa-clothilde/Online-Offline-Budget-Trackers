@@ -1,4 +1,4 @@
-const FILES_TO_CACHE = ["/", "/index.html", "/styles.css", "/index.js", '/manifest.webmanifest'];
+const FILES_TO_CACHE = ["/", "/index.html", "/styles.css", "/index.js", "/manifest.webmanifest"];
 
 const iconSizes = ["192", "512"];
 const iconFiles = iconSizes.map(
@@ -60,7 +60,7 @@ self.addEventListener("fetch", function (evt) {
               return response;
             })
             .catch((err) => {
-              console.log("network request failed!", evt.request)//COULD NOT GET FROM CACHE
+              console.log("network request failed!", evt.request)//DATA NOT CACHING, BUT VISIBLE IN PREVEIW under Applications tab--> data cache
               // Network request failed, try to get it from the cache.
               return cache.match(evt.request);
               
